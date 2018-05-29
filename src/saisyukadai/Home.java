@@ -37,7 +37,7 @@ public class Home {
             e.printStackTrace();
         }
         Iterator itr = result.getTweets().iterator();
-        String senti = "positive";
+        String senti = null;
 
         while (itr.hasNext()) {
             Status status = (Status)itr.next();
