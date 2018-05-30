@@ -26,9 +26,9 @@ public class SentimentSearch {
 
         //ツイート検索
         String rootUrl = "https://twitter.com/";
-        String queryWord = "アボガド6";
-        String since = "2018-05-21";
-        String until = "2018-06-01";
+        String queryWord = "ゴーリスト";
+        String since = "2018-05-01"; // いつから
+        String until = "2018-06-01"; // いつまで
         String queryUrl = rootUrl + "search?f=tweets&vertical=news&q="
                          + queryWord + "%20since%3A" + since + "%20until%3A" + until + "&src=typd";
         Document doc = Jsoup.connect(queryUrl).get();
@@ -44,7 +44,6 @@ public class SentimentSearch {
                     int page = i+1;
                     System.out.println("\n=========="+ page +"ページ目=========");
 
-                    //System.out.println(doc);
                     Element tab = doc.select("div.stream > ol").get(0);
 
                     for (Element tweet : tab.children()) {
@@ -57,8 +56,8 @@ public class SentimentSearch {
                         long dateTime = Long.parseLong(tweet.select("small.time > a >span").get(0).attr("data-time-ms"));
                         String date = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format( dateTime );
                         String name = tweet.select("span.FullNameGroup > strong").get(0).text();
-                        name = name.replaceAll(",", "，");
-                        text = text.replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("\r/n", " ");
+                        name = name.replaceAll(",", "，"); // ,は全角に
+                        text = text.replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("\r/n", " "); // 改行を消す
                         System.out.println(name + "," + date + "," + senti + "," +text +"\n");
                         String str = name + "," + date + "," + senti + "," +text;
                         bw.write(str);

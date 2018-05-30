@@ -33,12 +33,12 @@ public class Hometter {
         Query query = new Query();
 
         // 検索ワードの設定
-        String word = "ピカチュウ";
-        word = word + " -rt";
+        String word = "任天堂";
+        word = word + " -rt"; // RTは除外
         query.setQuery(word);
 
         // 1度のリクエストで取得するTweetの数（最大100件）
-        query.setCount(10);
+        query.setCount(100);
         query.resultType(Query.RECENT);
         QueryResult result = null;
 
@@ -59,7 +59,7 @@ public class Hometter {
             bw.write(str1);
 
             // 最大1500件（15ページ）
-            for (int i = 1; i <= 1; i++) {
+            for (int i = 1; i <= 10; i++) {
                 try {
                     result = twitter.search(query);
                 } catch (TwitterException e) {
