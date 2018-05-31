@@ -22,13 +22,15 @@ import twitter4j.TwitterException;
 
 public class SentimentSearch {
     public static void main(String[] args) throws TwitterException, InterruptedException, IOException{
-        Path SentiSearch = Paths.get("C:/TechTraining/resources/SentiSearch.csv");
+        Path SentiSearch = Paths.get("C:/TechTraining/resources/SentimentSearch.csv");
+        Files.deleteIfExists(SentiSearch); // 既に存在してたら削除
+        Files.createFile(SentiSearch); // ファイル作成
 
         //ツイート検索
         String rootUrl = "https://twitter.com/";
-        String queryWord = "ゴーリスト";
-        String since = "2018-05-01"; // いつから
-        String until = "2018-06-01"; // いつまで
+        String queryWord = "ポケモン";
+        String since = "2018-05-30"; // いつから
+        String until = "2018-05-31"; // いつまで
         String queryUrl = rootUrl + "search?f=tweets&vertical=news&q="
                          + queryWord + "%20since%3A" + since + "%20until%3A" + until + "&src=typd";
         Document doc = Jsoup.connect(queryUrl).get();
@@ -39,7 +41,7 @@ public class SentimentSearch {
             bw.write("ユーザー名,日付,感情,本文");
             bw.newLine();
 
-            for(int i =0; i<10000000 ; i++) {
+            for(int i =0; i<1000 ; i++) {
                 try {
                     int page = i+1;
                     System.out.println("\n=========="+ page +"ページ目=========");

@@ -33,7 +33,7 @@ public class Hometter {
         Query query = new Query();
 
         // 検索ワードの設定
-        String word = "任天堂";
+        String word = "数学ゴリラ";
         word = word + " -rt"; // RTは除外
         query.setQuery(word);
 
@@ -59,7 +59,7 @@ public class Hometter {
             bw.write(str1);
 
             // 最大1500件（15ページ）
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 1; i++) {
                 try {
                     result = twitter.search(query);
                 } catch (TwitterException e) {
